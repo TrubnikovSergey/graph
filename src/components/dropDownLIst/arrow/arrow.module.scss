@@ -1,0 +1,15 @@
+.arrow{
+    transition: transform 300ms;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-arrow{
+    display: none;
+}
+
+.checkbox-arrow:checked ~ .arrow{
+    transform: rotateX(180deg);
+}
+
