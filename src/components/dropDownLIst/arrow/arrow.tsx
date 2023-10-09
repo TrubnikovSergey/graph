@@ -4,7 +4,8 @@ import periodStore from "@/store/period";
 import { observer } from "mobx-react-lite";
 import style from "./arrow.module.scss";
 
-const Arrow = () => {
+const Arrow = observer(() => {
+  const isDown = periodStore.showDropDownPeriod;
   const handleClick = () => {
     periodStore.setShowDropDownPeriod(!periodStore.showDropDownPeriod);
   };
@@ -12,11 +13,11 @@ const Arrow = () => {
   return (
     <>
       <input className={style["checkbox-arrow"]} type="checkbox" id="checkbox" />
-      <label htmlFor="checkbox" className={style.arrow} onClick={handleClick}>
+      <label htmlFor="checkbox" className={`${style.arrow} ${isDown ? style.rotate : ""}`} onClick={handleClick}>
         <img src={down.src} />
       </label>
     </>
   );
-};
+});
 
 export default Arrow;

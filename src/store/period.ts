@@ -2,7 +2,7 @@ import { makeAutoObservable } from "mobx";
 
 class Period {
   periodList = [];
-  periodDivisions = [];
+  periodDivisions = null;
   periodSelected = "";
   showDropDownPeriod = false;
   constructor() {
