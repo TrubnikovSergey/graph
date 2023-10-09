@@ -12,6 +12,22 @@ export const translatePeriod = (data) => {
   }
 };
 
+export const divisionsFormated = (divisions, current) => {
+  let divisionsFormat = null;
+
+  if (current.id === "year" || current.id === "half_year") {
+    divisionsFormat = Object.keys(divisions).map((item) => shortMonthName(translateMonth(item)));
+  }
+  if (current.id === "month") {
+    divisionsFormat = Object.keys(divisions)
+      .filter((item) => Number(item) % 5 === 0)
+      .map((item) => (Number(item) < 10 ? `0${item}` : item));
+    divisionsFormat = ["01", ...divisionsFormat];
+  }
+
+  return divisionsFormat;
+};
+
 export const translateMonth = (month) => {
   switch (month) {
     case "January":
@@ -74,4 +90,27 @@ export const shortMonthName = (name) => {
     default:
       return name;
   }
+};
+
+export const calcHeight = (profit) => {
+  const asixY = [500, 1000, 2000, 5000, 10000];
+  let summ = 0;
+  const stepPX = 265 / 5;
+  let height = 15;
+
+  for (let i = 0; i < asixY.length; i++) {
+    if (asixY[i] >= profit) {
+      if (i > 0) {
+        const difference = asixY[i] - asixY[i - 1];
+        const balanceProfit = profit - asixY[i - 1];
+
+        height += (balanceProfit * stepPX) / difference;
+      }
+      break;
+    }
+
+    height += stepPX;
+  }
+
+  return height;
 };

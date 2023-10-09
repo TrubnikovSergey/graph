@@ -7,20 +7,21 @@ import { BarChart } from "../components/barChart";
 import { DropDownList } from "@/components/dropDownLIst/dropDownList";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { translatePeriod } from "@/utils";
+import { divisionsFormated, shortMonthName, translateMonth, translatePeriod } from "@/utils";
 import styles from "@/styles/Home.module.css";
 
 const initPeriodStore = (mock) => {
-  const periodObject = mock.finance.periods[0].graph;
-  const keys = Object.keys(periodObject).map((item) => ({ id: item, title: translatePeriod(item) }));
+  const { graph } = mock.finance.periods[0];
+  const periods = Object.keys(graph).map((item) => ({ id: item, title: translatePeriod(item) }));
 
-  periodStore.setPeriodList(keys);
-  periodStore.setPeriodSelected(keys[0]);
-  periodStore.setPeriodDivisions(periodObject[keys[0].id]);
+  periodStore.setPeriodSelected(periods[0]);
+  periodStore.setPeriodList(periods);
+  periodStore.setPeriodDivisions(graph[periods[0].id]);
+  periodStore.setPeriodDivisionsFormated(divisionsFormated(graph[periods[0].id], periods[0]));
 };
 
 export default observer(function Home() {
-  const isLoading = !(periodStore.periodDivisions && periodStore.periodList.length > 0);
+  const isLoading = !(periodStore.periodDivisions && periodStore.periodDivisionsFormated && periodStore.periodList.length > 0);
 
   useEffect(() => {
     initPeriodStore(mockData);

@@ -2,6 +2,8 @@ import { AxisX } from "../axisX";
 import { AxisY } from "../axisY";
 import { Chart } from "../chart";
 import data from "../../mockData/data.json";
+import { useState } from "react";
+import EmptyChart from "../emptyChart/emptyChart";
 import style from "./barChart.module.scss";
 
 export const BarChart = () => {
@@ -12,7 +14,7 @@ export const BarChart = () => {
       <div className={style.axisy}>
         <AxisY divisions={axisY} />
       </div>
-      <div className={style.chart}>
+      <div className={style.chart} id="chart">
         <Chart />
       </div>
       <div className={style.zero} />

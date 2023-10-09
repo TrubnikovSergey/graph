@@ -3,6 +3,7 @@ import { makeAutoObservable } from "mobx";
 class Period {
   periodList = [];
   periodDivisions = null;
+  periodDivisionsFormated = null;
   periodSelected = "";
   showDropDownPeriod = false;
   constructor() {
@@ -15,6 +16,10 @@ class Period {
 
   setPeriodDivisions(data) {
     this.periodDivisions = data;
+  }
+
+  setPeriodDivisionsFormated(data) {
+    this.periodDivisionsFormated = data;
   }
 
   setPeriodSelected(data) {

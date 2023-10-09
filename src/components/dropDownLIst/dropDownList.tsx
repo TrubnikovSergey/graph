@@ -4,13 +4,17 @@ import { observer } from "mobx-react-lite";
 import periodStore from "@/store/period";
 import mockData from "../../mockData/data.json";
 import style from "./dropDownList.module.scss";
+import { divisionsFormated } from "@/utils";
 
 export const DropDownList = observer(() => {
   const isShowList = periodStore.showDropDownPeriod;
   const period = periodStore.periodSelected;
 
   const handleClick = (item) => {
-    periodStore.setPeriodDivisions(mockData.finance.periods[0].graph[item.id]);
+    const { graph } = mockData.finance.periods[0];
+
+    periodStore.setPeriodDivisions(graph[item.id]);
+    periodStore.setPeriodDivisionsFormated(divisionsFormated(graph[item.id], item));
 
     periodStore.setPeriodSelected(item);
     periodStore.setShowDropDownPeriod(false);
