@@ -1,4 +1,4 @@
-##Для запуска проекта выполните следующие шаги:
+## Для запуска проекта выполните следующие шаги:
 
 - git clone https://github.com/TrubnikovSergey/graph.git
 - cd graph
