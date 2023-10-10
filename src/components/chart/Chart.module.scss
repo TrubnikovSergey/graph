@@ -30,32 +30,14 @@
 
 .item:hover{
     box-shadow: 0px 0px 8px 6px rgba(0, 10, 255, 0.15);
+    position: relative;
 }
 
 .item:hover .count{
     display: block;
-    // animation: show 300ms forwards;
-}
-
-@keyframes show {
-    0% {opacity: 0;display: block;}
-    100% {opacity: 1;}
-}
-
-.item:hover{
-    position: relative;
 }
 
 .add-height{
-    height: var(--new-height);
-    transition: height 300ms cubic-bezier(0, 1.26, 0.7, 0.96);
+    height: var(--height);
+    transition: height 300ms cubic-bezier(0, 1.26, 0.7, 0.96) 300ms;
 }
-
-// .hide-dropdown {
-//     opacity: 1;
-//     animation: hide 300ms forwards;
-// }
-// @keyframes hide {
-//     0% {opacity: 1;}
-//     100% {opacity: 0;display: none;}
-// }

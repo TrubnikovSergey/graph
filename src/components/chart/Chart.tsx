@@ -1,17 +1,24 @@
 import periodStore from "@/store/period";
 import style from "./Chart.module.scss";
 import { calcHeight } from "@/utils";
+import { useEffect, useState } from "react";
 
 export const Chart = () => {
+  const [addHeight, setAddHeight] = useState(false);
   const divisions = Object.entries(periodStore.periodDivisions);
+
+  useEffect(() => {
+    setAddHeight(false);
+    setTimeout(() => {
+      setAddHeight(true);
+    }, 300);
+  }, [periodStore.periodDivisions]);
 
   return (
     <div className={style.container}>
       {divisions.map((item) => {
-        // const classHeight = { height: calcHeight(item[1]), transition: "height 300ms cubic-bezier(0, 1.26, 0.7, 0.96)" };
-
         return (
-          <div key={item[0]} className={style.item} style={{ height: calcHeight(item[1]) }}>
+          <div key={item[0]} className={`${style.item} ${addHeight ? style["add-height"] : ""}`} style={{ "--height": `${calcHeight(item[1])}px` }}>
             <span className={style.count}>{item[1]}</span>
           </div>
         );
@@ -19,4 +26,3 @@ export const Chart = () => {
     </div>
   );
 };
-// style={`--new-height: ${calcHeight(item[1])}`}
